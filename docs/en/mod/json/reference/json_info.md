@@ -613,24 +613,27 @@ This is a simple "survive a day" but is triggered by waking up, so it will be co
 wake up for the first time after 24 hours into the game.
 
 ### `requirements`
+
 The requirements system in Cataclysm defines reusable sets of components, tools, and qualities needed for crafting, construction, and other game mechanics. Requirements are defined in JSON format and located in `data/json/requirements/`.
 
 ## JSON Structure
 
 ### Basic Format
+
 ```json
 {
   "id": "unique_id",
   "type": "requirement",
   "//": "Optional comment",
-  "components": [ /* materials consumed */ ],
-  "tools": [ /* items used but not consumed */ ],
-  "qualities": [ /* minimum tool quality levels */ ]
+  "components": [/* materials consumed */],
+  "tools": [/* items used but not consumed */],
+  "qualities": [/* minimum tool quality levels */]
 }
 ```
 
 #### Format
-Any of the three last arrays is optional, as long as one of them is present (a requirement must depend on *something* after all!)
+
+Any of the three last arrays is optional, as long as one of them is present (a requirement must depend on _something_ after all!)
 
 **Components** are organized as nested arrays representing alternatives and requirements:
 
@@ -659,7 +662,7 @@ Any of the three last arrays is optional, as long as one of them is present (a r
 
 **Qualities** specify minimum tool quality levels needed:
 
-```json
+````json
 "qualities": [
   { "id": "QUALITY_ID", "level": min_level }
 ]
@@ -670,9 +673,10 @@ Here is an example of a requirement in a recipe:
 
 ```json
 "using": [ [ "requirement_id", multiplier ] ]
-```
+````
 
 Multiple requirements:
+
 ```json
 "using": [
   [ "welding_standard", 1 ],
@@ -681,7 +685,6 @@ Multiple requirements:
 ```
 
 You can explore the files in the `/data/json/requirements` folder to see common examples of requirements for certain types of items or components. Make sure that your requirements do not form any circular dependencies.
-
 
 ### Skills
 
