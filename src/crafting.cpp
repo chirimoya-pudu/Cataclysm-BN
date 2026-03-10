@@ -1550,10 +1550,6 @@ std::vector<detached_ptr<item>> Character::consume_items( map &m,
 {
     std::vector<detached_ptr<item>> ret;
 
-    if( has_trait( trait_DEBUG_HS ) ) {
-        return ret;
-    }
-
     item_comp selected_comp = is.comp;
 
     const tripoint &loc = origin;
@@ -1581,7 +1577,7 @@ std::vector<detached_ptr<item>> Character::consume_items( map &m,
                         std::make_move_iterator( tmp.end() ) );
         }
     }
-    if( is.use_from & usage_from::player ) {
+    if( is.use_from & usage_from::player && ! has_trait( trait_DEBUG_HS ) ) {
         if( by_charges ) {
             std::vector<detached_ptr<item>> tmp = use_charges( selected_comp.type, real_count, filter );
             ret.insert( ret.end(), std::make_move_iterator( tmp.begin() ),
