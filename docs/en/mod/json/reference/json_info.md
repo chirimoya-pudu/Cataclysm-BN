@@ -625,9 +625,24 @@ The requirements system in Cataclysm defines reusable sets of components, tools,
   "id": "unique_id",
   "type": "requirement",
   "//": "Optional comment",
-  "components": [/* materials consumed */],
-  "tools": [/* items used but not consumed */],
-  "qualities": [/* minimum tool quality levels */]
+  "components": [
+     [
+        [ "gasoline", 1 ],
+        [ "diesel", 1 ],
+        [ "biodiesel", 1 ]
+     ]
+  ],
+  "tools": [
+     [
+        [ "soldering_iron", 1 ],
+        [ "soldering_ethanol", 10 ],
+        [ "toolset", 1 ]
+     ]
+  ],
+  "qualities": [
+      { "id": "CUT", "level": 1 },
+      { "id": "HAMMER", "level": 2 },
+  ]
 }
 ```
 
