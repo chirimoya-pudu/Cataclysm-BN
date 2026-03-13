@@ -4243,7 +4243,7 @@ void Character::apply_skill_boost()
 
 void Character::do_skill_rust()
 {
-    const int rust_rate_tmp = rust_rate();
+    int rust_rate_tmp = rust_rate();
     for( std::pair<const skill_id, SkillLevel> &pair : *_skills ) {
         const Skill &aSkill = *pair.first;
         SkillLevel &skill_level_obj = pair.second;
@@ -4272,6 +4272,15 @@ void Character::do_skill_rust()
         const bool charged_bio_mem = get_power_level() > bio_memory->power_trigger &&
                                      has_active_bionic( bio_memory );
         const int oldSkillLevel = skill_level_obj.level();
+
+        // if the current skill is a combat skill and PRED2/3/4 are active, reduce rust rate by 20%
+        if( aSkill.is_combat_skill() &&
+            ( has_trait_flag( trait_flag_PRED2 ) ||
+              has_trait_flag( trait_flag_PRED3 ) ||
+              has_trait_flag( trait_flag_PRED4 ) ) ) {
+            rust_rate_tmp = rust_rate_tmp * 0.8;
+        }
+
         if( skill_level_obj.rust( charged_bio_mem, rust_rate_tmp ) ) {
             add_msg_if_player( m_warning,
                                _( "Your knowledge of %s begins to fade, but your memory banks retain it!" ), aSkill.name() );
