@@ -4274,7 +4274,7 @@ void Character::do_skill_rust()
         const int oldSkillLevel = skill_level_obj.level();
 
         // default multiplier is 1; if PRED2/3/4 are enabled, reduce the multiplier accordingly
-        int rust_rate_multiplier = 1;
+        float rust_rate_multiplier = 1;
 
         if ( aSkill.is_combat_skill() ) {
             if ( has_trait_flag( trait_flag_PRED2 ) ) {
